@@ -196,7 +196,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         toast(err.message || "Falha ao iniciar", "erro");
     }
 
-    window.addEventListener("hashchange", onRouteChange);
+    window.addEventListener("hashchange", () => {
+        if (typeof onRouteChange === "function") onRouteChange();
+    });
+
 
     if (window.feather) feather.replace();
 });
@@ -205,7 +208,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function resolveAuth() {
     try {
-        const res = await apiFetch("/auth/me");
+        const res = await apiFetch("/api/auth/me");
         const u = res.user || res.data || res.usuario || res.me || null;
 
         authUser = u
