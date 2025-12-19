@@ -3,12 +3,10 @@
 // ===============================
 // Configuração
 // ===============================
-const API_BASE = window.APP_CONFIG.API_BASE;
-const url = `${API}${path}`;
- 
+const API_BASE = window.APP_CONFIG?.API_BASE;
+if (!API_BASE) throw new Error("APP_CONFIG.API_BASE não carregou (configuracao.js precisa vir antes do professores.js)");
 
-
-
+const API = `${API_BASE.replace(/\/+$/, "")}/api`;
 
 
 let authUser = null;
@@ -95,7 +93,7 @@ function getAuthHeaders() {
 }
 
 async function apiFetch(path, { method = "GET", body = null, retryAuth = true } = {}) {
-    const url = `${API_BASE}${path}`;
+    const url = `${API}${path}`;
 
     const res = await fetch(url, {
         method,
