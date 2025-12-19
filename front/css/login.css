@@ -1,0 +1,152 @@
+/* ===== Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+/* ===== Layout Principal ===== */
+body {
+    background: #f7f7ff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 850px;
+    max-width: 95%;
+}
+
+.form-container {
+    flex: 1;
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* ===== Formulários ===== */
+.form {
+    width: 100%;
+    max-width: 320px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.form.active {
+    display: flex;
+}
+
+.form h2 {
+    color: #2e2a5f;
+    font-size: 1.8rem;
+}
+
+.form p {
+    color: #555;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+select {
+    cursor: pointer;
+}
+
+input:focus, select:focus {
+    border-color: #7b61ff;
+    outline: none;
+}
+
+/* ===== Botões ===== */
+.btn {
+    background: #2e2a5f;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #4e45a3;
+}
+
+.toggle-text {
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.toggle-text a {
+    color: #7b61ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.toggle-text a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Painel lateral ===== */
+.side {
+    background: linear-gradient(135deg, #7b61ff, #2e2a5f);
+    color: #fff;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    text-align: center;
+}
+
+.side h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.side span {
+    color: #ffedff;
+}
+
+.side p {
+    font-size: 1rem;
+    max-width: 250px;
+    opacity: 0.9;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 800px) {
+    .container {
+        flex-direction: column-reverse;
+    }
+
+    .side {
+        padding: 2rem;
+    }
+
+    .form-container {
+        padding: 2rem 1.5rem;
+    }
+}

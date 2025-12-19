@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENEM++ | Entrar ou Cadastrar</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="form-container">
+            <!-- Login -->
+            <form id="loginForm" class="form active">
+                <h2>Entrar</h2>
+                <p>Acesse sua conta ENEM++</p>
+                <input type="email" id="loginEmail" placeholder="E-mail" required>
+                <input type="password" id="loginSenha" placeholder="Senha" required>
+                <button type="submit" class="btn">Entrar</button>
+                <p class="toggle-text">Não tem conta? <a href="#" id="showRegister">Cadastre-se</a></p>
+            </form>
+
+            <!-- Cadastro -->
+            <form id="registerForm" class="form">
+                <h2>Criar Conta</h2>
+                <p>Junte-se ao ENEM++</p>
+                <input type="text" id="cadNome" placeholder="Nome completo" required>
+                <input type="email" id="cadEmail" placeholder="E-mail" required>
+                <input type="password" id="cadSenha" placeholder="Senha" required>
+                <select id="cadTipo" required>
+                    <option value="" disabled selected>Selecione o tipo de usuário</option>
+                    <option value="aluno">Aluno</option>
+                    <option value="professor">Professor</option>
+                </select>
+                <button type="submit" class="btn">Cadastrar</button>
+                <p class="toggle-text">Já tem conta? <a href="#" id="showLogin">Entrar</a></p>
+            </form>
+        </div>
+
+        <div class="side">
+            <h1>ENEM <span>++</span></h1>
+            <p>Sua plataforma completa de preparação para o ENEM.</p>
+        </div>
+    </div>
+
+    <script src="../js/cadastro.js"></script>
+</body>
+
+</html>
+

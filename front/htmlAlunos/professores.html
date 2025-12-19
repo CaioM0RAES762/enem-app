@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ENEM++ - Área do Professor (Unificada)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/professores.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/professores.js" defer></script>
+</head>
+
+<body>
+    <nav class="barra-navegacao">
+        <div class="container-barra-navegacao">
+            <a href="#" class="logo-navegacao">ENEM++</a>
+
+            <ul class="menu-navegacao">
+                <li class="item-navegacao">
+                    <a href="#dashboard" class="link-navegacao ativo" data-section="dashboard">
+                        <i data-feather="grid"></i> Dashboard
+                    </a>
+                </li>
+                <li class="item-navegacao">
+                    <a href="#redacoes" class="link-navegacao" data-section="redacoes">
+                        <i data-feather="file-text"></i> Redações
+                    </a>
+                </li>
+                <li class="item-navegacao">
+                    <a href="#questionarios" class="link-navegacao" data-section="questionarios">
+                        <i data-feather="check-square"></i> Questionários
+                    </a>
+                </li>
+                <li class="item-navegacao">
+                    <a href="#turmas" class="link-navegacao" data-section="turmas">
+                        <i data-feather="users"></i> Turmas
+                    </a>
+                </li>
+            </ul>
+
+            <button id="menu-hamburguer" type="button" aria-label="Abrir menu">
+                <i data-feather="menu"></i>
+            </button>
+
+            <!-- Vai ser preenchido via JS com a inicial/nome do professor -->
+            <div class="perfil-navegacao" id="perfil-professor" title="Professor">K</div>
+        </div>
+    </nav>
+
+    <!-- ===================== DASHBOARD ===================== -->
+    <section id="dashboard" class="page-section active">
+        <main class="conteudo-principal">
+            <h1 class="titulo-principal">Dashboard do Professor</h1>
+            <p class="subtitulo-principal">Visão geral do desempenho das suas turmas</p>
+
+            <section class="grade grade-4">
+                <div class="cartao cartao-estatistica">
+                    <div class="icone-estatistica"><i data-feather="users"></i></div>
+                    <div class="info-estatistica">
+                        <span class="titulo-estatistica">Total de Alunos</span>
+                        <span class="valor-estatistica" id="stat-total-alunos">...</span>
+                        <span class="delta-estatistica sucesso" id="delta-total-alunos">Calculado agora</span>
+                    </div>
+                </div>
+
+                <div class="cartao cartao-estatistica">
+                    <div class="icone-estatistica"><i data-feather="clock"></i></div>
+                    <div class="info-estatistica">
+                        <span class="titulo-estatistica">Redações Pendentes</span>
+                        <span class="valor-estatistica" id="stat-redacoes-pendentes">...</span>
+                        <span class="delta-estatistica aviso" id="delta-redacoes-pendentes">Aguardando correção</span>
+                    </div>
+                </div>
+
+                <div class="cartao cartao-estatistica">
+                    <div class="icone-estatistica"><i data-feather="check-circle"></i></div>
+                    <div class="info-estatistica">
+                        <span class="titulo-estatistica">Quizzes Concluídos</span>
+                        <span class="valor-estatistica" id="stat-quizzes-concluidos">...</span>
+                        <span class="delta-estatistica" id="delta-quizzes-concluidos">Soma total</span>
+                    </div>
+                </div>
+
+                <div class="cartao cartao-estatistica">
+                    <div class="icone-estatistica"><i data-feather="trending-up"></i></div>
+                    <div class="info-estatistica">
+                        <span class="titulo-estatistica">Média Geral</span>
+                        <span class="valor-estatistica" id="stat-media-geral">...</span>
+                        <span class="delta-estatistica sucesso" id="delta-media-geral">Todas as turmas</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grade grade-2">
+                <div class="cartao">
+                    <h3>Média Geral por Turma</h3>
+                    <div style="height: 300px; width: 100%; position: relative; overflow: hidden;">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                    <small id="barChart-hint" style="display:block; margin-top:8px; color:#777;"></small>
+                </div>
+
+                <div class="cartao">
+                    <h3>Dificuldade por Matéria (Quizzes)</h3>
+                    <p style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">Cor vermelha: abaixo de 70%</p>
+                    <div style="height: 300px; width: 100%; position: relative; overflow: hidden;">
+                        <canvas id="difficultyChart"></canvas>
+                    </div>
+                    <small id="difficultyChart-hint" style="display:block; margin-top:8px; color:#777;"></small>
+                </div>
+            </section>
+
+            <section class="cartao" style="margin-top: 1.5rem;">
+                <h3>Raio-X das Redações (Competências ENEM)</h3>
+                <div
+                    style="height: 350px; width: 100%; position: relative; display: flex; justify-content: center; overflow: hidden;">
+                    <canvas id="radarChart"></canvas>
+                </div>
+                <small id="radarChart-hint" style="display:block; margin-top:8px; color:#777;"></small>
+            </section>
+        </main>
+    </section>
+
+    <!-- ===================== TURMAS / ALUNOS ===================== -->
+    <section id="turmas" class="page-section">
+        <main class="conteudo-principal">
+            <h1 class="titulo-principal">Gerenciar Turmas e Alunos</h1>
+            <p class="subtitulo-principal">Organize suas turmas e acompanhe seus alunos</p>
+
+            <div class="barra-ferramentas">
+                <div class="abas">
+                    <button id="tab-alunos" class="botao-aba ativo" type="button">Alunos</button>
+                    <button id="tab-turmas" class="botao-aba" type="button">Turmas</button>
+                </div>
+
+                <!-- filtros ALUNOS -->
+                <div class="acoes" id="acoes-alunos-view" style="gap: 0.5rem; flex-wrap: wrap;">
+                    <input type="text" id="filtro-aluno-nome" class="controle-formulario"
+                        placeholder="Buscar por nome ou e-mail..." style="width: 200px;" />
+
+                    <select id="filtro-aluno-turma" class="controle-formulario">
+                        <option value="">Todas as Turmas</option>
+                    </select>
+
+                    <select id="filtro-aluno-desempenho" class="controle-formulario">
+                        <option value="">Qualquer Desempenho</option>
+                        <option value="atencao">🔴 Atenção (&lt; 60)</option>
+                        <option value="medio">🟡 Médio (60 - 79)</option>
+                        <option value="excelente">🟢 Excelente (≥ 80)</option>
+                    </select>
+
+                    <select id="filtro-aluno-redacao" class="controle-formulario">
+                        <option value="">Status Redação</option>
+                        <option value="pendente">Pendente</option>
+                        <option value="corrigida">Corrigida</option>
+                    </select>
+
+                    <button id="btn-novo-aluno" class="botao botao-primario" type="button">
+                        <i data-feather="plus"></i> Novo Aluno
+                    </button>
+                </div>
+
+                <!-- filtros TURMAS -->
+                <div class="acoes" id="acoes-turmas-view" style="display: none; gap: 0.5rem;">
+                    <input type="text" id="filtro-turma-nome" class="controle-formulario"
+                        placeholder="Buscar turma..." />
+                    <select id="filtro-turma-periodo" class="controle-formulario">
+                        <option value="">Todos os Períodos</option>
+                        <option value="Matutino">Matutino</option>
+                        <option value="Vespertino">Vespertino</option>
+                        <option value="Noturno">Noturno</option>
+                        <option value="Integral">Integral</option>
+                    </select>
+                    <button id="btn-nova-turma" class="botao botao-primario" type="button">
+                        <i data-feather="plus"></i> Nova Turma
+                    </button>
+                </div>
+            </div>
+
+            <!-- LISTA ALUNOS -->
+            <div id="view-lista-alunos" style="display: block;">
+                <section class="cartao">
+                    <h3>Alunos Cadastrados</h3>
+                    <ul class="lista-aluno" id="lista-alunos-geral"></ul>
+                    <p id="alunos-empty" style="display:none; color:#777; margin-top:10px;">
+                        Nenhum aluno encontrado com os filtros atuais.
+                    </p>
+                </section>
+            </div>
+
+            <!-- LISTA TURMAS -->
+            <div id="view-lista-turmas"
+                style="display: none; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; padding-top: 1rem;">
+            </div>
+        </main>
+    </section>
+
+    <!-- ===================== QUESTIONÁRIOS (REVISAR) ===================== -->
+    <section id="questionarios" class="page-section">
+        <main class="conteudo-principal">
+            <h1 class="titulo-principal">Revisar Questionários</h1>
+            <p class="subtitulo-principal">Acompanhe o desempenho dos alunos e forneça feedback</p>
+
+            <!-- ✅ IDs alinhados com o JS (cards) -->
+            <section class="grade grade-4">
+                <div class="cartao cartao-estatistica">
+                    <div class="icone-estatistica"><i data-feather="file-text"></i></div>
+                    <div class="info-estatistica">
+                        <span class="titulo-estatistica">Total de Tentativas</span>
+                        <span class="valor-estatistica" id="stat-total-tentativas">...</span>
+                        <span class="delta-estatistica" id="delta-qz-total">No filtro atual</span>
+                    </div>
+                </div>
+
+                <div class="cartao cartao-estatistica">
+                    <div class="icone-estatistica sucesso"><i data-feather="pie-chart"></i></div>
+                    <div class="info-estatistica">
+                        <span class="titulo-estatistica">Média de Acertos</span>
+                        <span class="valor-estatistica" id="stat-media-acertos">...</span>
+                        <span class="delta-estatistica" id="delta-qz-media">No filtro atual</span>
+                    </div>
+                </div>
+
+                <div class="cartao cartao-estatistica">
+                    <div class="icone-estatistica"><i data-feather="send"></i></div>
+                    <div class="info-estatistica">
+                        <span class="titulo-estatistica">Feedbacks Enviados</span>
+                        <span class="valor-estatistica" id="stat-feedbacks">...</span>
+                        <span class="delta-estatistica" id="delta-qz-feedbacks">Com feedback</span>
+                    </div>
+                </div>
+
+                <div class="cartao cartao-estatistica">
+                    <div class="icone-estatistica"><i data-feather="users"></i></div>
+                    <div class="info-estatistica">
+                        <span class="titulo-estatistica">Alunos Ativos</span>
+                        <span class="valor-estatistica" id="stat-alunos-ativos">...</span>
+                        <span class="delta-estatistica" id="delta-qz-alunos-ativos">No filtro atual</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="barra-ferramentas">
+                <h2>Questionários</h2>
+                <div class="acoes">
+                    <input type="text" id="filtro-aluno" class="controle-formulario" placeholder="Buscar aluno..." />
+
+                    <select id="filtro-status-quiz" class="controle-formulario">
+                        <option value="">Status Feedback</option>
+                        <option value="Com feedback">Com Feedback</option>
+                        <option value="Sem feedback">Sem Feedback</option>
+                    </select>
+
+                    <select id="filtro-turma" class="controle-formulario">
+                        <option value="">Todas as Turmas</option>
+                    </select>
+
+                    <select id="filtro-materia" class="controle-formulario">
+                        <option value="">Todas as Matérias</option>
+                    </select>
+                </div>
+            </div>
+
+            <section class="cartao">
+                <h3>Resultados de Questionários (<span id="count-questionarios">0</span>)</h3>
+                <ul class="lista-atividade" id="lista-questionarios"></ul>
+
+                <p id="questionarios-empty" style="display:none; color:#777; margin-top:10px;">
+                    Nenhuma tentativa encontrada com os filtros atuais.
+                </p>
+            </section>
+        </main>
+    </section>
+
+    <!-- ===================== REDAÇÕES (LISTA) ===================== -->
+    <section id="redacoes" class="page-section">
+        <main class="conteudo-principal">
+            <h1 class="titulo-principal">Correção de Redações</h1>
+            <p class="subtitulo-principal">Avalie e dê feedback nas redações dos alunos</p>
+
+            <section class="grade grade-3">
+                <div class="cartao cartao-estatistica">
+                    <div class="icone-estatistica aviso"><i data-feather="clock"></i></div>
+                    <div class="info-estatistica">
+                        <span class="titulo-estatistica">Pendentes</span>
+                        <span class="valor-estatistica" id="stat-red-pendentes">0</span>
+                        <span class="delta-estatistica">Aguardando correção</span>
+                    </div>
+                </div>
+
+                <div class="cartao cartao-estatistica">
+                    <div class="icone-estatistica sucesso"><i data-feather="check"></i></div>
+                    <div class="info-estatistica">
+                        <span class="titulo-estatistica">Corrigidas</span>
+                        <span class="valor-estatistica" id="stat-red-corrigidas">0</span>
+                        <span class="delta-estatistica">Total acumulado</span>
+                    </div>
+                </div>
+
+                <div class="cartao cartao-estatistica">
+                    <div class="icone-estatistica estrela"><i data-feather="star"></i></div>
+                    <div class="info-estatistica">
+                        <span class="titulo-estatistica">Média Geral</span>
+                        <span class="valor-estatistica" id="stat-red-media">0</span>
+                        <span class="delta-estatistica">de 1000 pontos</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="barra-ferramentas">
+                <select id="filtro-status-redacao" class="controle-formulario" style="width: 200px;">
+                    <option value="todos">Todas as Redações</option>
+                    <option value="pendente">Pendentes</option>
+                    <option value="corrigida">Corrigidas</option>
+                </select>
+
+                <!-- opcional: turma -->
+                <select id="filtro-redacao-turma" class="controle-formulario" style="width: 220px;">
+                    <option value="">Todas as Turmas</option>
+                </select>
+
+                <div class="abas">
+                    <button class="botao-aba ativo" type="button" data-view="grade">Grade</button>
+                    <button class="botao-aba" type="button" data-view="lista">Lista</button>
+                </div>
+            </div>
+
+            <section class="grade grade-2" id="lista-redacoes-pendentes"></section>
+
+            <p id="redacoes-empty" style="display:none; color:#777; margin-top:10px;">
+                Nenhuma redação encontrada com os filtros atuais.
+            </p>
+        </main>
+    </section>
+
+    <!-- ===================== CORRIGIR REDAÇÃO (DETALHE) ===================== -->
+    <section id="corrigir-redacao" class="page-section">
+        <main class="conteudo-principal">
+            <a href="#redacoes" class="link-voltar" data-section="redacoes">
+                <i data-feather="arrow-left"></i> Voltar
+            </a>
+
+            <div class="cartao cabecalho-correcao">
+                <div>
+                    <h1 class="titulo-principal" style="margin: 0;">Redação do Aluno</h1>
+                    <span id="redacao-meta">Turma • Data de envio: ...</span>
+                </div>
+
+                <span class="etiqueta etiqueta-pendente" id="redacao-status">Pendente</span>
+            </div>
+
+            <div class="cartao">
+                <h3>Tema:</h3>
+                <p id="redacao-tema">...</p>
+
+                <h3>Texto:</h3>
+                <p class="texto-redacao" id="redacao-texto">...</p>
+            </div>
+
+            <form class="cartao" id="form-correcao-redacao">
+                <input type="hidden" id="redacao-id" />
+                <input type="hidden" id="id-aluno-correcao" />
+
+                <h3>Avaliação por Competência</h3>
+
+                <div class="grupo-formulario grupo-competencia">
+                    <label for="c1">Competência 1: Domínio da escrita formal</label>
+                    <div class="controle-competencia">
+                        <input type="range" id="c1" min="0" max="200" step="40" value="120" />
+                        <span class="pontuacao-competencia" data-out="c1">120/200</span>
+                    </div>
+                </div>
+
+                <div class="grupo-formulario grupo-competencia">
+                    <label for="c2">Competência 2: Compreensão do tema</label>
+                    <div class="controle-competencia">
+                        <input type="range" id="c2" min="0" max="200" step="40" value="120" />
+                        <span class="pontuacao-competencia" data-out="c2">120/200</span>
+                    </div>
+                </div>
+
+                <div class="grupo-formulario grupo-competencia">
+                    <label for="c3">Competência 3: Argumentação</label>
+                    <div class="controle-competencia">
+                        <input type="range" id="c3" min="0" max="200" step="40" value="120" />
+                        <span class="pontuacao-competencia" data-out="c3">120/200</span>
+                    </div>
+                </div>
+
+                <div class="grupo-formulario grupo-competencia">
+                    <label for="c4">Competência 4: Coesão</label>
+                    <div class="controle-competencia">
+                        <input type="range" id="c4" min="0" max="200" step="40" value="120" />
+                        <span class="pontuacao-competencia" data-out="c4">120/200</span>
+                    </div>
+                </div>
+
+                <div class="grupo-formulario grupo-competencia">
+                    <label for="c5">Competência 5: Proposta de intervenção</label>
+                    <div class="controle-competencia">
+                        <input type="range" id="c5" min="0" max="200" step="40" value="120" />
+                        <span class="pontuacao-competencia" data-out="c5">120/200</span>
+                    </div>
+                </div>
+
+                <h2 class="pontuacao-total">
+                    Nota Total: <strong id="nota-total">600/1000</strong>
+                </h2>
+
+                <hr />
+
+                <div class="grupo-formulario">
+                    <label for="feedback">Feedback para o Aluno</label>
+                    <textarea id="feedback" class="controle-formulario" rows="5"
+                        placeholder="Escreva aqui seu feedback detalhado sobre a redação do aluno..."></textarea>
+                </div>
+
+                <div class="acoes-formulario">
+                    <button type="button" class="botao botao-secundario"
+                        onclick="location.hash='redacoes'">Cancelar</button>
+                    <button type="submit" class="botao botao-primario">Salvar Correção e Nota</button>
+                </div>
+            </form>
+        </main>
+    </section>
+
+    <!-- ===================== REVISAR QUESTIONÁRIO (DETALHE) ===================== -->
+    <section id="revisar-questionario" class="page-section">
+        <main class="conteudo-principal">
+            <a href="#questionarios" class="link-voltar" data-section="questionarios">
+                <i data-feather="arrow-left"></i> Voltar
+            </a>
+
+            <div class="cartao cabecalho-quiz">
+                <div>
+                    <h1 class="titulo-principal" style="margin: 0;" id="quiz-titulo">Quiz</h1>
+                    <span id="quiz-subtitulo">Detalhes...</span>
+                </div>
+
+                <div class="progresso-quiz">
+                    <span class="barra-progresso" id="quiz-barra" style="width: 0%;"></span>
+                    <span id="quiz-percentual">0%</span>
+                </div>
+            </div>
+
+            <div class="cartao">
+                <div class="grade grade-3">
+                    <div class="estatistica-quiz correto">
+                        <span>Acertos</span>
+                        <strong id="quiz-acertos">0</strong>
+                    </div>
+                    <div class="estatistica-quiz incorreto">
+                        <span>Erros</span>
+                        <strong id="quiz-erros">0</strong>
+                    </div>
+                    <div class="estatistica-quiz total">
+                        <span>Total</span>
+                        <strong id="quiz-total">0</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lista-questao" id="lista-questoes-detalhe">
+                <h3>Respostas Detalhadas</h3>
+            </div>
+
+            <!-- ✅ IDs alinhados com o JS de feedback -->
+            <form class="cartao" id="form-feedback-quiz">
+                <input type="hidden" id="tentativa-id" />
+
+                <h3>Feedback do Professor</h3>
+                <div class="grupo-formulario">
+                    <textarea id="quiz-feedback" class="controle-formulario" rows="5"
+                        placeholder="Escreva um feedback personalizado para o aluno..."></textarea>
+                </div>
+                <div class="acoes-formulario" style="justify-content: flex-end;">
+                    <button type="submit" class="botao botao-primario">Enviar Feedback</button>
+                </div>
+            </form>
+        </main>
+    </section>
+
+    <!-- ===================== MODAL ALUNO ===================== -->
+    <div id="modal-aluno" class="modal">
+        <div class="modal-conteudo">
+            <div class="modal-cabecalho">
+                <h3 id="modal-titulo">Adicionar Novo Aluno</h3>
+                <button id="btn-fechar-modal" class="botao-icone" type="button"><i data-feather="x"></i></button>
+            </div>
+
+            <form id="form-aluno">
+                <input type="hidden" id="aluno-id" value="" />
+
+                <div class="grade grade-2">
+                    <div class="grupo-formulario">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" class="controle-formulario" required />
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" class="controle-formulario" required />
+                    </div>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="turma">Turma</label>
+                    <select id="turma" class="controle-formulario" required>
+                        <option value="" disabled selected>Selecione...</option>
+                    </select>
+                </div>
+
+                <div class="grade grade-3">
+                    <div class="grupo-formulario">
+                        <label for="quizzes">Total de Quizzes</label>
+                        <input type="number" id="quizzes" class="controle-formulario" min="0" value="0" required />
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="redacoes">Total de Redações</label>
+                        <input type="number" id="redacoes" class="controle-formulario" min="0" value="0" required />
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="media">Média Geral (%)</label>
+                        <input type="number" id="media" class="controle-formulario" min="0" max="100" value="0"
+                            required />
+                    </div>
+                </div>
+
+                <div class="acoes-formulario">
+                    <button type="button" id="btn-cancelar" class="botao botao-secundario">Cancelar</button>
+                    <button type="submit" id="btn-salvar" class="botao botao-primario">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===================== MODAL TURMA ===================== -->
+    <div id="modal-turma" class="modal">
+        <div class="modal-conteudo">
+            <div class="modal-cabecalho">
+                <h3 id="modal-titulo-turma">Nova Turma</h3>
+                <button id="btn-fechar-modal-turma" class="botao-icone" type="button"><i data-feather="x"></i></button>
+            </div>
+
+            <form id="form-turma">
+                <input type="hidden" id="turma-id" />
+
+                <div class="grupo-formulario">
+                    <label for="nome-turma">Nome da Turma</label>
+                    <input type="text" id="nome-turma" class="controle-formulario" placeholder="Ex: Turma A" required />
+                </div>
+
+                <div class="grade grade-2">
+                    <div class="grupo-formulario">
+                        <label for="ano-turma">Ano/Série</label>
+                        <input type="text" id="ano-turma" class="controle-formulario" placeholder="Ex: 3º Ano"
+                            required />
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="periodo-turma">Período</label>
+                        <select id="periodo-turma" class="controle-formulario">
+                            <option value="Matutino">Matutino</option>
+                            <option value="Vespertino">Vespertino</option>
+                            <option value="Noturno">Noturno</option>
+                            <option value="Integral">Integral</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="acoes-formulario">
+                    <button type="button" id="btn-cancelar-turma" class="botao botao-secundario">Cancelar</button>
+                    <button type="submit" class="botao botao-primario">Salvar Turma</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===================== NAVEGAÇÃO POR HASH (mantida) ===================== -->
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            const el = document.getElementById(id);
+            if (el) el.classList.add('active');
+
+            // Gatilhos (mantidos)
+            if (id === 'dashboard') {
+                window.dispatchEvent(new Event('resize'));
+                if (typeof carregarDashboard === 'function') carregarDashboard();
+            }
+
+            if (id === 'turmas' && typeof carregarTurmasEAlunos === 'function') {
+                carregarTurmasEAlunos();
+            }
+
+            if (id === 'questionarios' && typeof carregarQuestionariosProfessor === 'function') {
+                carregarQuestionariosProfessor();
+            }
+
+            if (id === 'redacoes' && typeof carregarRedacoesProfessor === 'function') {
+                carregarRedacoesProfessor();
+            }
+
+            document.querySelectorAll('.menu-navegacao .link-navegacao').forEach(a => {
+                a.classList.toggle('ativo', a.getAttribute('data-section') === id);
+            });
+
+            if (window.feather) feather.replace();
+        }
+
+        document.addEventListener('click', function (e) {
+            const a = e.target.closest('[data-section]');
+            if (a) {
+                const target = a.getAttribute('data-section');
+                if (target) {
+                    e.preventDefault();
+                    location.hash = target;
+                }
+            }
+        });
+
+        window.addEventListener('hashchange', () => {
+            const id = location.hash.replace('#', '') || 'dashboard';
+            showSection(id);
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const start = location.hash.replace('#', '') || 'dashboard';
+            showSection(start);
+            if (window.feather) feather.replace();
+        });
+    </script>
+
+    <footer>
+        <p>© 2025 ENEM++. Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+</html>

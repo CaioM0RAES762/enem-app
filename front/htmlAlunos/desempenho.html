@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Progresso - ENEM++</title>
+    <link rel="stylesheet" href="../css/setting.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- Cabeçalho Principal -->
+    <header class="cabecalho">
+        <div class="conteudo-cabecalho">
+            <div class="lado-esquerdo-cabecalho">
+                <div class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span>ENEM++</span>
+                </div>
+
+                <!-- Navegação -->
+                <nav class="navegacao">
+                    <a href="dashboard.html" class="link-navegacao">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        Dashboard
+                    </a>
+                    <a href="questoes.html" class="link-navegacao">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        Questionários
+                    </a>
+                    <a href="redacao.html" class="link-navegacao">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                        Redação
+                    </a>
+                    <a href="auto.html" class="link-navegacao">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
+                        Auto Avaliação
+                    </a>
+                    <a href="resultado.html" class="link-navegacao">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                        Resultados
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Menu Dropdown do Usuário -->
+            <div class="container-usuario">
+                <div class="avatar-usuario" id="avatarUsuario"></div>
+                <div class="menu-dropdown-usuario" id="menuUsuario">
+                    <div class="info-usuario">
+                        <div class="nome-usuario" id="nomeUsuario">Carregando...</div>
+                        <div class="email-usuario" id="emailUsuario">-</div>
+                    </div>
+                    <div class="papel-usuario">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        Aluno
+                    </div>
+                    <div class="divisor-menu"></div>
+                    <a href="desempenho.html" class="item-menu">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                        Meu Progresso
+                    </a>
+                    <a href="config.html" class="item-menu">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path
+                                d="M12 1v6m0 6v6m5.2-14.8l-4.2 4.2m0 6l-4.2 4.2M23 12h-6m-6 0H1m14.8 5.2l-4.2-4.2m0-6l-4.2-4.2">
+                            </path>
+                        </svg>
+                        Configurações
+                    </a>
+                    <div class="divisor-menu"></div>
+                    <a href="login.html" class="item-menu sair">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        Sair
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="conteudo-principal">
+        <!-- Seção Meu Progresso -->
+        <section class="secao-progresso">
+            <div class="cabecalho-secao">
+                <div>
+                    <div class="titulo-secao">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        Meu Progresso
+                    </div>
+                    <p class="subtitulo-secao">Acompanhe seu desempenho e evolução nos estudos</p>
+                </div>
+                <div class="badge-ano">3º ano</div>
+            </div>
+
+            <div class="grid-info-usuario">
+                <div class="campo-info">
+                    <label>Nome</label>
+                    <input type="text" id="nomeUsuarioInfo" value="Carregando..." readonly>
+                </div>
+                <div class="campo-info">
+                    <label>Email</label>
+                    <input type="text" id="emailUsuarioInfo" value="-" readonly>
+                </div>
+                <div class="campo-info">
+                    <label>Série</label>
+                    <select disabled>
+                        <option>3º ano - Ensino Médio</option>
+                    </select>
+                </div>
+                <div class="campo-info">
+                    <label>Status</label>
+                    <div class="status-container">
+                        <span class="status-badge">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Ativo
+                        </span>
+                        <span class="status-info" id="redacoesCorrigidas">0 redações corrigidas</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cards de Estatísticas -->
+        <div class="grid-estatisticas">
+            <div class="card-estatistica">
+                <div class="label-estatistica">Total de Questões</div>
+                <div class="valor-estatistica" id="totalQuestoes">0</div>
+                <div class="descricao-estatistica">Questões respondidas</div>
+            </div>
+            <div class="card-estatistica">
+                <div class="label-estatistica">Taxa de Acerto</div>
+                <div class="valor-estatistica" id="taxaAcerto">0%</div>
+                <div class="descricao-estatistica">Média geral de acertos</div>
+            </div>
+            <div class="card-estatistica">
+                <div class="label-estatistica">Nota Estimada ENEM</div>
+                <div class="valor-estatistica" id="notaEstimada">0</div>
+                <div class="descricao-estatistica">De 1000 pontos possíveis</div>
+            </div>
+        </div>
+
+        <!-- Grid de Análise -->
+        <div class="grid-analise">
+            <!-- Pontos Fortes -->
+            <div class="card-analise">
+                <div class="cabecalho-analise">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    <div>
+                        <h3>Pontos Fortes</h3>
+                        <p>Áreas em que você se destaca</p>
+                    </div>
+                </div>
+                <div class="lista-barras" id="pontosFortes">
+                    <p style="text-align: center; color: #737373;">Carregando...</p>
+                </div>
+            </div>
+
+            <!-- Áreas de Melhoria -->
+            <div class="card-analise">
+                <div class="cabecalho-analise">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    <div>
+                        <h3>Áreas de Melhoria</h3>
+                        <p>Foque seus estudos nestas áreas</p>
+                    </div>
+                </div>
+                <div class="lista-barras" id="areasMelhoria">
+                    <p style="text-align: center; color: #737373;">Carregando...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visão Geral por Área -->
+        <div class="card-radar">
+            <div class="cabecalho-card">
+                <h3>Visão Geral por Área</h3>
+                <p>Comparação de desempenho entre as áreas do conhecimento</p>
+            </div>
+            <div class="container-radar">
+                <canvas id="radarChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Redações Corrigidas -->
+        <div class="card-redacoes">
+            <div class="cabecalho-card">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                <div>
+                    <h3>Redações Corrigidas</h3>
+                    <p>Histórico de redações e suas notas</p>
+                </div>
+            </div>
+
+            <div class="lista-redacoes" id="listaRedacoes">
+                <p style="text-align: center; color: #737373; padding: 2rem;">Carregando redações...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/desempenho.js"></script>
+</body>
+
+</html>

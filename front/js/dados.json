@@ -1,0 +1,238 @@
+{
+  "metricas": [
+    {
+      "id": "questoes",
+      "rotulo": "Questões Resolvidas",
+      "valor": "1,247",
+      "mudanca": "+15% desde o mês passado",
+      "tipoIcone": "grafico",
+      "fundoIcone": "#eff6ff",
+      "corIcone": "#3b82f6"
+    },
+    {
+      "id": "taxa",
+      "rotulo": "Taxa de Acerto",
+      "valor": "73%",
+      "mudanca": "+5% desde a semana passada",
+      "tipoIcone": "alvo",
+      "fundoIcone": "#f0fdf4",
+      "corIcone": "#22c55e"
+    },
+    {
+      "id": "sequencia",
+      "rotulo": "Sequência Atual",
+      "valor": "12 dias",
+      "mudanca": "Estudando consecutivamente",
+      "tipoIcone": "tendencia",
+      "fundoIcone": "#fef3c7",
+      "corIcone": "#f59e0b"
+    },
+    {
+      "id": "prioridades",
+      "rotulo": "Matérias Prioritárias",
+      "ehPrioridade": true,
+      "materias": [
+        {
+          "nome": "Ciências da Natureza",
+          "prioridade": "Alta"
+        },
+        {
+          "nome": "Matemática",
+          "prioridade": "Média"
+        }
+      ],
+      "tipoIcone": "info",
+      "fundoIcone": "#f5f5f5",
+      "corIcone": "#737373"
+    }
+  ],
+  "atividadeSemanal": {
+    "rotulos": ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
+    "dados": [12, 19, 8, 15, 21, 18, 10]
+  },
+  "desempenhoPorMateria": {
+    "rotulos": [
+      "Linguagens",
+      "Matemática",
+      "Ciências da Natureza",
+      "Ciências Humanas",
+      "Redação"
+    ],
+    "dados": [85, 75, 70, 80, 78],
+    "cores": [
+      "#10b981",
+      "#3b82f6",
+      "#f97316",
+      "#ef4444",
+      "#a855f7"
+    ]
+  },
+  "progressoPorMateria": [
+    {
+      "materia": "Matemática",
+      "progresso": 75
+    },
+    {
+      "materia": "Linguagens",
+      "progresso": 85
+    },
+    {
+      "materia": "Ciências da Natureza",
+      "progresso": 70
+    },
+    {
+      "materia": "Ciências Humanas",
+      "progresso": 80
+    },
+    {
+      "materia": "Redação",
+      "progresso": 78
+    }
+  ],
+
+  "materias": [
+    {
+      "id": "matematica",
+      "nome": "Matemática",
+      "cor": "#c9c9c9",
+      "icone": "livro",
+      "quantidadeQuestoes": 2,
+      "questoes": [
+        {
+          "id": 1,
+          "enunciado": "Uma função f(x) = ax² + bx + c tem como gráfico uma parábola que passa pelos pontos (0, 3), (1, 6) e (2, 11). Qual é o valor de a + b + c?",
+          "alternativas": ["6", "8", "10", "12", "14"],
+          "respostaCorreta": 0,
+          "explicacao": "Substituindo os pontos na função: f(0) = c = 3. Para f(1): a + b + c = 6. Para f(2): 4a + 2b + c = 11. Substituindo c = 3: a + b = 3 e 4a + 2b = 8. Resolvendo: a = 1, b = 2, c = 3. Portanto, a + b + c = 6."
+        },
+        {
+          "id": 2,
+          "enunciado": "Em uma progressão aritmética, o primeiro termo é 5 e a razão é 3. Qual é o décimo termo dessa progressão?",
+          "alternativas": ["29", "32", "35", "38", "41"],
+          "respostaCorreta": 1,
+          "explicacao": "O termo geral de uma PA é: aₙ = a₁ + (n − 1)·r. Assim, a₁ = 5, r = 3 e n = 10. Então: a₁₀ = 5 + 9·3 = 5 + 27 = 32."
+        }
+      ]
+    },
+
+    {
+      "id": "linguagens",
+      "nome": "Linguagens",
+      "cor": "#10b981",
+      "icone": "livro",
+      "quantidadeQuestoes": 2,
+      "questoes": [
+        {
+          "id": 1,
+          "enunciado": "Qual figura de linguagem está presente na frase: 'Aquele lugar é um paraíso'?",
+          "alternativas": ["Metáfora", "Comparação", "Metonímia", "Hipérbole", "Ironia"],
+          "respostaCorreta": 0,
+          "explicacao": "A frase estabelece uma substituição de sentido ao afirmar que um lugar 'é um paraíso', sem usar conectivos como 'como' ou 'parece'. Isso caracteriza uma metáfora."
+        },
+        {
+          "id": 2,
+          "enunciado": "O Modernismo brasileiro teve início oficialmente com qual evento?",
+          "alternativas": [
+            "Semana de Arte Moderna de 1922",
+            "Proclamação da República",
+            "Abolição da Escravatura",
+            "Independência do Brasil",
+            "Golpe de 1964"
+          ],
+          "respostaCorreta": 0,
+          "explicacao": "O Modernismo brasileiro começa oficialmente com a Semana de Arte Moderna de 1922, realizada no Teatro Municipal de São Paulo."
+        }
+      ]
+    },
+
+    {
+      "id": "ciencias-natureza",
+      "nome": "Ciências da Natureza",
+      "cor": "#f97316",
+      "icone": "globo",
+      "quantidadeQuestoes": 2,
+      "questoes": [
+        {
+          "id": 1,
+          "enunciado": "Qual é a unidade fundamental de hereditariedade responsável pela transmissão de características dos pais para os filhos?",
+          "alternativas": ["Célula", "Gene", "Cromossomo", "DNA", "Proteína"],
+          "respostaCorreta": 1,
+          "explicacao": "O gene é a unidade fundamental da hereditariedade, pois contém as informações que determinam características transmitidas aos descendentes."
+        },
+        {
+          "id": 2,
+          "enunciado": "Em qual processo as plantas convertem energia luminosa em energia química?",
+          "alternativas": ["Respiração celular", "Fermentação", "Fotossíntese", "Quimiossíntese", "Digestão"],
+          "respostaCorreta": 2,
+          "explicacao": "A fotossíntese é o processo no qual as plantas utilizam luz solar para produzir glicose, convertendo energia luminosa em energia química."
+        }
+      ]
+    },
+
+    {
+      "id": "ciencias-humanas",
+      "nome": "Ciências Humanas",
+      "cor": "#ef4444",
+      "icone": "pessoas",
+      "quantidadeQuestoes": 2,
+      "questoes": [
+        {
+          "id": 1,
+          "enunciado": "Qual foi o principal objetivo da criação da ONU (Organização das Nações Unidas) em 1945?",
+          "alternativas": [
+            "Promover o comércio internacional",
+            "Manter a paz e a segurança mundial",
+            "Combater a fome no mundo",
+            "Desenvolver tecnologias espaciais",
+            "Regular a economia global"
+          ],
+          "respostaCorreta": 1,
+          "explicacao": "A ONU foi criada após a Segunda Guerra Mundial com o objetivo principal de manter a paz e evitar novos conflitos globais."
+        },
+        {
+          "id": 2,
+          "enunciado": "O conceito de 'Estado de Direito' está relacionado a qual princípio fundamental?",
+          "alternativas": [
+            "Todos estão sujeitos às leis, inclusive governantes",
+            "O Estado possui poder absoluto",
+            "Apenas os cidadãos devem obedecer às leis",
+            "As leis são opcionais",
+            "O governo pode mudar as leis a qualquer momento"
+          ],
+          "respostaCorreta": 0,
+          "explicacao": "No Estado de Direito, todos — inclusive as autoridades — devem obedecer às leis, garantindo justiça e igualdade jurídica."
+        }
+      ]
+    },
+
+    {
+      "id": "redacao",
+      "nome": "Redação",
+      "cor": "#a855f7",
+      "icone": "caneta",
+      "quantidadeQuestoes": 2,
+      "questoes": [
+        {
+          "id": 1,
+          "enunciado": "Qual é a estrutura básica de uma dissertação argumentativa?",
+          "alternativas": [
+            "Apenas desenvolvimento e conclusão",
+            "Introdução, desenvolvimento e conclusão",
+            "Título e desenvolvimento",
+            "Desenvolvimento apenas",
+            "Introdução e conclusão apenas"
+          ],
+          "respostaCorreta": 1,
+          "explicacao": "A dissertação argumentativa exige uma introdução (apresentação do tema), desenvolvimento (argumentos) e conclusão (fechamento da ideia)."
+        },
+        {
+          "id": 2,
+          "enunciado": "Na redação do ENEM, quantas competências são avaliadas?",
+          "alternativas": ["3", "4", "5", "6", "7"],
+          "respostaCorreta": 2,
+          "explicacao": "A redação do ENEM é avaliada com base em 5 competências, cada uma valendo até 200 pontos."
+        }
+      ]
+    }
+  ]
+}
