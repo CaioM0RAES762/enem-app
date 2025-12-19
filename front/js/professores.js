@@ -4,7 +4,8 @@
 // Configuração
 // ===============================
 const API_BASE = window.APP_CONFIG.API_BASE;
-const API = `${API_BASE}/api`; 
+const url = `${API}${path}`;
+ 
 
 
 
@@ -208,7 +209,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function resolveAuth() {
     try {
-        const res = await apiFetch("/api/auth/me");
+        const res = await apiFetch("/auth/me");
         const u = res.user || res.data || res.usuario || res.me || null;
 
         authUser = u
