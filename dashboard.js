@@ -29,7 +29,7 @@ const icones = {
 // ========== FUNÇÕES DE AUTENTICAÇÃO ==========
 
 function redirectToLogin() {
-  window.location.href = "./login.html";
+  window.location.href = "login.html";
 }
 
 function buildAuthHeaders() {

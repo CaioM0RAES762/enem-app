@@ -56,7 +56,7 @@
 
         const local = readUserFromLocalStorageFallback();
         if (!local?.id) {
-            window.location.href = "./login.html";
+            window.location.href = "login.html";
             return null;
         }
         return local;

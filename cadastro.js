@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   const API_URL = "http://localhost:3000"; 
 
-  const PATH_PROFESSOR_PAGE = "../htmlAlunos/professores.html";
-  const PATH_ALUNO_PAGE = "../htmlAlunos/dashboard.html";
+  const PATH_PROFESSOR_PAGE = "professores.html";
+  const PATH_ALUNO_PAGE = "dashboard.html";
 
 
   showRegisterLink.addEventListener("click", (e) => {

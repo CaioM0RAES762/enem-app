@@ -2,11 +2,10 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Progresso - ENEM++</title>
-    <link rel="stylesheet" href="../css/setting.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto Avaliação - ENEM++</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
@@ -53,7 +52,7 @@
                         </svg>
                         Redação
                     </a>
-                    <a href="auto.html" class="link-navegacao">
+                    <a href="auto.html" class="link-navegacao ativo">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <circle cx="12" cy="12" r="10"></circle>
@@ -74,13 +73,14 @@
                 </nav>
             </div>
 
-            <!-- Menu Dropdown do Usuário -->
+            <!-- Menu do Usuário -->
             <div class="container-usuario">
-                <div class="avatar-usuario" id="avatarUsuario"></div>
+                <div class="avatar-usuario" id="avatarUsuario">C</div>
+
                 <div class="menu-dropdown-usuario" id="menuUsuario">
                     <div class="info-usuario">
-                        <div class="nome-usuario" id="nomeUsuario">Carregando...</div>
-                        <div class="email-usuario" id="emailUsuario">-</div>
+                        <div class="nome-usuario">User</div>
+                        <div class="email-usuario">User@gmail.com</div>
                     </div>
                     <div class="papel-usuario">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -127,139 +127,122 @@
 
     <!-- Conteúdo Principal -->
     <main class="conteudo-principal">
-        <!-- Seção Meu Progresso -->
-        <section class="secao-progresso">
-            <div class="cabecalho-secao">
-                <div>
-                    <div class="titulo-secao">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        Meu Progresso
-                    </div>
-                    <p class="subtitulo-secao">Acompanhe seu desempenho e evolução nos estudos</p>
+        <div class="secao-auto-avaliacao">
+            <h1 class="titulo-principal">Auto Avaliação</h1>
+            <p class="subtitulo">Avalie seu nível de confiança em cada tópico (1 = Muito baixo, 10 = Muito alto)</p>
+
+            <!-- Barra de Progresso -->
+            <div class="container-progresso">
+                <div class="label-progresso">
+                    <span>Progresso</span>
+                    <span id="progressoTexto">0%</span>
                 </div>
-                <div class="badge-ano">3º ano</div>
+                <div class="barra-progresso">
+                    <div class="preenchimento-progresso" id="barraProgresso" style="width: 0%;"></div>
+                </div>
             </div>
 
-            <div class="grid-info-usuario">
-                <div class="campo-info">
-                    <label>Nome</label>
-                    <input type="text" id="nomeUsuarioInfo" value="Carregando..." readonly>
-                </div>
-                <div class="campo-info">
-                    <label>Email</label>
-                    <input type="text" id="emailUsuarioInfo" value="-" readonly>
-                </div>
-                <div class="campo-info">
-                    <label>Série</label>
-                    <select disabled>
-                        <option>3º ano - Ensino Médio</option>
-                    </select>
-                </div>
-                <div class="campo-info">
-                    <label>Status</label>
-                    <div class="status-container">
-                        <span class="status-badge">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Ativo
-                        </span>
-                        <span class="status-info" id="redacoesCorrigidas">0 redações corrigidas</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Cards de Estatísticas -->
-        <div class="grid-estatisticas">
-            <div class="card-estatistica">
-                <div class="label-estatistica">Total de Questões</div>
-                <div class="valor-estatistica" id="totalQuestoes">0</div>
-                <div class="descricao-estatistica">Questões respondidas</div>
-            </div>
-            <div class="card-estatistica">
-                <div class="label-estatistica">Taxa de Acerto</div>
-                <div class="valor-estatistica" id="taxaAcerto">0%</div>
-                <div class="descricao-estatistica">Média geral de acertos</div>
-            </div>
-            <div class="card-estatistica">
-                <div class="label-estatistica">Nota Estimada ENEM</div>
-                <div class="valor-estatistica" id="notaEstimada">0</div>
-                <div class="descricao-estatistica">De 1000 pontos possíveis</div>
-            </div>
-        </div>
-
-        <!-- Grid de Análise -->
-        <div class="grid-analise">
-            <!-- Pontos Fortes -->
-            <div class="card-analise">
-                <div class="cabecalho-analise">
+            <!-- Seção Matemática -->
+            <div class="secao-materia">
+                <h2 class="titulo-materia">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                     </svg>
-                    <div>
-                        <h3>Pontos Fortes</h3>
-                        <p>Áreas em que você se destaca</p>
+                    Areas do Enem
+                </h2>
+
+                <!-- Algebra -->
+                <div class="item-topico">
+                    <div class="cabecalho-topico">
+                        <span class="nome-topico">Linguagens</span>
+                        <div class="lado-direito-topico">
+                            <span class="badge-nivel" aria-live="polite"></span>
+                            <span class="valor-slider"></span>
+                        </div>
+                    </div>
+                    <div class="container-slider">
+                        <div class="slider-track-fill"></div>
+                        <input id="slider_algebra" type="range" min="1" max="10" value="10" class="slider"
+                            data-topico="algebra" />
                     </div>
                 </div>
-                <div class="lista-barras" id="pontosFortes">
-                    <p style="text-align: center; color: #737373;">Carregando...</p>
-                </div>
-            </div>
 
-            <!-- Áreas de Melhoria -->
-            <div class="card-analise">
-                <div class="cabecalho-analise">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                    </svg>
-                    <div>
-                        <h3>Áreas de Melhoria</h3>
-                        <p>Foque seus estudos nestas áreas</p>
+                <!-- Geometria -->
+                <div class="item-topico">
+                    <div class="cabecalho-topico">
+                        <span class="nome-topico">Matematica e suas Tecnologias</span>
+                        <div class="lado-direito-topico">
+                            <span class="badge-nivel" aria-live="polite"></span>
+                            <span class="valor-slider"></span>
+                        </div>
+                    </div>
+                    <div class="container-slider">
+                        <div class="slider-track-fill"></div>
+                        <input id="slider_geometria" type="range" min="1" max="10" value="8" class="slider"
+                            data-topico="geometria" />
                     </div>
                 </div>
-                <div class="lista-barras" id="areasMelhoria">
-                    <p style="text-align: center; color: #737373;">Carregando...</p>
+
+                <!-- Funções -->
+                <div class="item-topico">
+                    <div class="cabecalho-topico">
+                        <span class="nome-topico">Ciências Humanas</span>
+                        <div class="lado-direito-topico">
+                            <span class="badge-nivel" aria-live="polite"></span>
+                            <span class="valor-slider"></span>
+                        </div>
+                    </div>
+                    <div class="container-slider">
+                        <div class="slider-track-fill"></div>
+                        <input id="slider_funcoes" type="range" min="1" max="10" value="6" class="slider"
+                            data-topico="funcoes" />
+                    </div>
+                </div>
+
+                <!-- Trigonometria -->
+                <div class="item-topico">
+                    <div class="cabecalho-topico">
+                        <span class="nome-topico">Ciências da Natureza</span>
+                        <div class="lado-direito-topico">
+                            <span class="badge-nivel" aria-live="polite"></span>
+                            <span class="valor-slider"></span>
+                        </div>
+                    </div>
+                    <div class="container-slider">
+                        <div class="slider-track-fill"></div>
+                        <input id="slider_trigonometria" type="range" min="1" max="10" value="4" class="slider"
+                            data-topico="trigonometria" />
+                    </div>
+                </div>
+
+                <!-- Estatística e Probabilidade -->
+                <div class="item-topico">
+                    <div class="cabecalho-topico">
+                        <span class="nome-topico">Redação</span>
+                        <div class="lado-direito-topico">
+                            <span class="badge-nivel" aria-live="polite"></span>
+                            <span class="valor-slider"></span>
+                        </div>
+                    </div>
+                    <div class="container-slider">
+                        <div class="slider-track-fill"></div>
+                        <input id="slider_estatistica" type="range" min="1" max="10" value="2" class="slider"
+                            data-topico="estatistica" />
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Visão Geral por Área -->
-        <div class="card-radar">
-            <div class="cabecalho-card">
-                <h3>Visão Geral por Área</h3>
-                <p>Comparação de desempenho entre as áreas do conhecimento</p>
-            </div>
-            <div class="container-radar">
-                <canvas id="radarChart"></canvas>
-            </div>
-        </div>
-
-        <!-- Redações Corrigidas -->
-        <div class="card-redacoes">
-            <div class="cabecalho-card">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                </svg>
-                <div>
-                    <h3>Redações Corrigidas</h3>
-                    <p>Histórico de redações e suas notas</p>
-                </div>
-            </div>
-
-            <div class="lista-redacoes" id="listaRedacoes">
-                <p style="text-align: center; color: #737373; padding: 2rem;">Carregando redações...</p>
+            <!-- Ações -->
+            <div class="acoes-auto-avaliacao" style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+                <button id="btnResetAuto" type="button" class="botao-primario">Resetar</button>
+                <button id="btnSalvarAuto" type="button" class="botao-secundario">Salvar</button>
             </div>
         </div>
     </main>
 
-    <script src="../js/desempenho.js"></script>
+    <script src="auth.js"></script>
+    <script src="auto_avaliacao.js"></script>
 </body>
 
 </html>

@@ -40,7 +40,7 @@
     let redacaoAtualId = null;
 
     function redirectToLogin() {
-        window.location.href = "./login.html";
+        window.location.href = "login.html";
     }
 
     function safeJsonParse(txt) {

@@ -9,8 +9,8 @@
 
     const PATH_LOGIN_PAGE = "./login.html";
 
-    const PATH_ALUNO_PAGE = "../htmlAlunos/dashboard.html";
-    const PATH_PROFESSOR_PAGE = "../htmlProfessores/professores.html";
+    const PATH_ALUNO_PAGE = "dashboard.html";
+    const PATH_PROFESSOR_PAGE = "professores.html";
 
     const AUTH_ME_URL = `${API_BASE}/api/auth/me`;
     const AUTH_LOGOUT_URL = `${API_BASE}/api/auth/logout`;
