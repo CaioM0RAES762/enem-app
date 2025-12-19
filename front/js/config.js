@@ -17,7 +17,7 @@ const nomeUsuarioEl = menuUsuario?.querySelector(".nome-usuario") || document.qu
 const emailUsuarioEl = menuUsuario?.querySelector(".email-usuario") || document.querySelector(".email-usuario");
 
 function redirectToLogin() {
-    window.location.href = "login.html";
+    window.location.href = "./login.html";
 }
 
 function buildAuthHeaders() {

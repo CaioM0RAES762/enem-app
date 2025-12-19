@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Progresso - ENEM++</title>
-    <link rel="stylesheet" href="setting.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Configurações - ENEM++</title>
+    <link rel="stylesheet" href="../css/setting.css">
 </head>
 
 <body>
@@ -74,13 +73,15 @@
                 </nav>
             </div>
 
-            <!-- Menu Dropdown do Usuário -->
+            <!-- Avatar do Usuário -->
             <div class="container-usuario">
-                <div class="avatar-usuario" id="avatarUsuario"></div>
+                <div class="avatar-usuario" id="avatarUsuario">U</div>
+
+                <!-- Menu Dropdown -->
                 <div class="menu-dropdown-usuario" id="menuUsuario">
                     <div class="info-usuario">
-                        <div class="nome-usuario" id="nomeUsuario">Carregando...</div>
-                        <div class="email-usuario" id="emailUsuario">-</div>
+                        <div class="nome-usuario">Usuário</div>
+                        <div class="email-usuario">usuario@exemplo.com</div>
                     </div>
                     <div class="papel-usuario">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -127,139 +128,134 @@
 
     <!-- Conteúdo Principal -->
     <main class="conteudo-principal">
-        <!-- Seção Meu Progresso -->
-        <section class="secao-progresso">
-            <div class="cabecalho-secao">
-                <div>
-                    <div class="titulo-secao">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        <div class="container-configuracoes">
+            <!-- Cabeçalho da Página -->
+            <div class="cabecalho-pagina">
+                <h1 class="titulo-pagina">Configurações</h1>
+                <p class="subtitulo-pagina">Gerencie suas informações pessoais e preferências da conta</p>
+            </div>
+
+            <!-- Seção: Informações do Perfil -->
+            <div class="secao-config">
+                <div class="cabecalho-secao">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <div>
+                        <h2 class="titulo-secao">Informações do Perfil</h2>
+                        <p class="descricao-secao">Atualize suas informações pessoais e foto de perfil</p>
+                    </div>
+                </div>
+
+                <div class="conteudo-secao">
+                    <!-- Upload de Foto -->
+                    <div class="grupo-foto">
+                        <div class="avatar-perfil">U</div>
+                        <div class="info-foto">
+                            <div class="label-foto">Foto de perfil</div>
+                            <button class="btn-alterar-foto" id="btnAlterarFoto" type="button">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                                    </path>
+                                    <circle cx="12" cy="13" r="4"></circle>
+                                </svg>
+                                Alterar foto
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Formulário de Perfil -->
+                    <form class="formulario-perfil" id="formPerfil">
+                        <div class="grupo-campo">
+                            <label class="label-campo">Nome completo</label>
+                            <input type="text" class="input-campo" placeholder="Digite seu nome" id="inputNome"
+                                required>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label class="label-campo">Email</label>
+                            <input type="email" class="input-campo input-desabilitado" value="carregando..." disabled>
+                            <p class="texto-ajuda">O email não pode ser alterado</p>
+                        </div>
+
+                        <button type="submit" class="btn-primario">Salvar alterações</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Seção: Segurança -->
+            <div class="secao-config">
+                <div class="cabecalho-secao">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <div>
+                        <h2 class="titulo-secao">Segurança</h2>
+                        <p class="descricao-secao">Altere sua senha para manter sua conta segura</p>
+                    </div>
+                </div>
+
+                <div class="conteudo-secao">
+                    <form class="formulario-senha" id="formSenha">
+                        <div class="grupo-campo">
+                            <label class="label-campo">Senha atual</label>
+                            <input type="password" class="input-campo" placeholder="Digite sua senha atual"
+                                id="inputSenhaAtual" required>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label class="label-campo">Nova senha</label>
+                            <input type="password" class="input-campo"
+                                placeholder="Digite sua nova senha (mínimo 6 caracteres)" id="inputNovaSenha" required>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label class="label-campo">Confirmar nova senha</label>
+                            <input type="password" class="input-campo" placeholder="Confirme sua nova senha"
+                                id="inputConfirmarSenha" required>
+                        </div>
+
+                        <button type="submit" class="btn-secundario">Alterar senha</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Seção: Zona de Perigo -->
+            <div class="secao-config secao-perigo">
+                <div class="cabecalho-secao">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                        </path>
+                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <div>
+                        <h2 class="titulo-secao titulo-perigo">Zona de Perigo</h2>
+                        <p class="descricao-secao descricao-perigo">Ações irreversíveis relacionadas à sua conta</p>
+                    </div>
+                </div>
+
+                <div class="conteudo-secao">
+                    <button class="btn-perigo" id="btnSairConta" type="button">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
                         </svg>
-                        Meu Progresso
-                    </div>
-                    <p class="subtitulo-secao">Acompanhe seu desempenho e evolução nos estudos</p>
+                        Sair da conta
+                    </button>
                 </div>
-                <div class="badge-ano">3º ano</div>
-            </div>
-
-            <div class="grid-info-usuario">
-                <div class="campo-info">
-                    <label>Nome</label>
-                    <input type="text" id="nomeUsuarioInfo" value="Carregando..." readonly>
-                </div>
-                <div class="campo-info">
-                    <label>Email</label>
-                    <input type="text" id="emailUsuarioInfo" value="-" readonly>
-                </div>
-                <div class="campo-info">
-                    <label>Série</label>
-                    <select disabled>
-                        <option>3º ano - Ensino Médio</option>
-                    </select>
-                </div>
-                <div class="campo-info">
-                    <label>Status</label>
-                    <div class="status-container">
-                        <span class="status-badge">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Ativo
-                        </span>
-                        <span class="status-info" id="redacoesCorrigidas">0 redações corrigidas</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Cards de Estatísticas -->
-        <div class="grid-estatisticas">
-            <div class="card-estatistica">
-                <div class="label-estatistica">Total de Questões</div>
-                <div class="valor-estatistica" id="totalQuestoes">0</div>
-                <div class="descricao-estatistica">Questões respondidas</div>
-            </div>
-            <div class="card-estatistica">
-                <div class="label-estatistica">Taxa de Acerto</div>
-                <div class="valor-estatistica" id="taxaAcerto">0%</div>
-                <div class="descricao-estatistica">Média geral de acertos</div>
-            </div>
-            <div class="card-estatistica">
-                <div class="label-estatistica">Nota Estimada ENEM</div>
-                <div class="valor-estatistica" id="notaEstimada">0</div>
-                <div class="descricao-estatistica">De 1000 pontos possíveis</div>
-            </div>
-        </div>
-
-        <!-- Grid de Análise -->
-        <div class="grid-analise">
-            <!-- Pontos Fortes -->
-            <div class="card-analise">
-                <div class="cabecalho-analise">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                    </svg>
-                    <div>
-                        <h3>Pontos Fortes</h3>
-                        <p>Áreas em que você se destaca</p>
-                    </div>
-                </div>
-                <div class="lista-barras" id="pontosFortes">
-                    <p style="text-align: center; color: #737373;">Carregando...</p>
-                </div>
-            </div>
-
-            <!-- Áreas de Melhoria -->
-            <div class="card-analise">
-                <div class="cabecalho-analise">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                    </svg>
-                    <div>
-                        <h3>Áreas de Melhoria</h3>
-                        <p>Foque seus estudos nestas áreas</p>
-                    </div>
-                </div>
-                <div class="lista-barras" id="areasMelhoria">
-                    <p style="text-align: center; color: #737373;">Carregando...</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Visão Geral por Área -->
-        <div class="card-radar">
-            <div class="cabecalho-card">
-                <h3>Visão Geral por Área</h3>
-                <p>Comparação de desempenho entre as áreas do conhecimento</p>
-            </div>
-            <div class="container-radar">
-                <canvas id="radarChart"></canvas>
-            </div>
-        </div>
-
-        <!-- Redações Corrigidas -->
-        <div class="card-redacoes">
-            <div class="cabecalho-card">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                </svg>
-                <div>
-                    <h3>Redações Corrigidas</h3>
-                    <p>Histórico de redações e suas notas</p>
-                </div>
-            </div>
-
-            <div class="lista-redacoes" id="listaRedacoes">
-                <p style="text-align: center; color: #737373; padding: 2rem;">Carregando redações...</p>
             </div>
         </div>
     </main>
 
-    <script src="desempenho.js"></script>
+    <script src="../js/config.js"></script>
 </body>
 
 </html>

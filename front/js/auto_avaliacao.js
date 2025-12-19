@@ -10,7 +10,7 @@ const nomeUsuarioEl = menuUsuario?.querySelector(".nome-usuario") || null;
 const emailUsuarioEl = menuUsuario?.querySelector(".email-usuario") || null;
 
 function redirectToLogin() {
-    window.location.href = "login.html";
+    window.location.href = "./login.html";
 }
 
 function buildAuthHeaders() {
