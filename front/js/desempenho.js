@@ -2,9 +2,8 @@
 (function () {
     "use strict";
 
-    const API_BASE =
-        (window.Auth && window.Auth.API_BASE) ||
-        `http://${window.location.hostname}:3000`;
+    const API_BASE = window.APP_CONFIG.API_BASE;
+
 
     function qs(id) {
         return document.getElementById(id);

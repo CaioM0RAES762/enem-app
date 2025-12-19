@@ -17,7 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // CONFIG
   // =========================
-  const API_URL = "http://localhost:3000"; 
+  const API_URL = window.APP_CONFIG.API_BASE;
+
+
+
 
   const PATH_PROFESSOR_PAGE = "../htmlAlunos/professores.html";
   const PATH_ALUNO_PAGE = "../htmlAlunos/dashboard.html";

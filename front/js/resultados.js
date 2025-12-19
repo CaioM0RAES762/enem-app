@@ -1,28 +1,11 @@
 (() => {
   "use strict";
 
-  const API_PORT = 3000;
+  const API_BASE = window.APP_CONFIG.API_BASE;
+  const API_RESULTADOS = `${API_BASE}/api/resultados`;
+  const API_AUTH_ME = `${API_BASE}/api/auth/me`;
+  const API_AUTH_LOGOUT = `${API_BASE}/api/auth/logout`;
 
-  function getApiCandidates() {
-    const host = window.location.hostname;
-    const primary = `http://${host}:${API_PORT}`;
-    const fallbackHost = host === "localhost" ? "127.0.0.1" : "localhost";
-    const fallback = `http://${fallbackHost}:${API_PORT}`;
-    return primary === fallback ? [primary] : [primary, fallback];
-  }
-
-  let API_BASE = getApiCandidates()[0];
-  let API_RESULTADOS = `${API_BASE}/api/resultados`;
-  let API_AUTH_ME = `${API_BASE}/api/auth/me`;
-  let API_AUTH_LOGOUT = `${API_BASE}/api/auth/logout`;
-
-  function setApiBase(base) {
-    API_BASE = base;
-    API_RESULTADOS = `${API_BASE}/api/resultados`;
-    API_AUTH_ME = `${API_BASE}/api/auth/me`;
-    API_AUTH_LOGOUT = `${API_BASE}/api/auth/logout`;
-    console.log("[resultados] API_BASE definido como:", API_BASE);
-  }
 
   const LS_TOKEN_KEYS = ["auth_token", "authToken"];
   const LS_USER_KEYS = ["userData", "user_data"];
@@ -92,7 +75,6 @@
 
     const resp = await fetch(url, {
       method: options.method || "GET",
-      credentials: "include",
       headers,
       body: options.body ? JSON.stringify(options.body) : undefined,
     });
@@ -108,48 +90,34 @@
     return { ok: resp.ok, status: resp.status, json };
   }
 
-  async function fetchMeTryAllHosts() {
-    const token = getAuthToken();
-    const candidates = getApiCandidates();
-
-    for (const base of candidates) {
-      try {
-        const res = await fetch(`${base}/api/auth/me`, {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-        });
-
-        if (!res.ok) continue;
-
-        const data = await res.json();
-        const user = normalizeUser(data?.user || data?.usuario || data);
-
-        if (user?.id) {
-          setApiBase(base);
-          writeUserToLocalStorage(user);
-          return user;
-        }
-      } catch {
-      }
-    }
-    return null;
-  }
-
   async function requireAuthOrRedirect() {
-    const me = await fetchMeTryAllHosts();
-    if (me?.id) return me;
+    try {
+      const token = getAuthToken();
 
-    const local = readUserFromLocalStorage();
-    if (local?.id) return local;
+      const resp = await fetch(API_AUTH_ME, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
 
-    console.error("[resultados] Não autenticado — redirecionando login.");
-    window.location.href = "./login.html";
-    return null;
+      if (!resp.ok) throw new Error("Não autenticado");
+
+      const data = await resp.json();
+      const user = normalizeUser(data?.user);
+
+      if (!user?.id) throw new Error("Usuário inválido");
+
+      writeUserToLocalStorage(user);
+      return user;
+    } catch (e) {
+      console.error("[simulado] Não autenticado:", e);
+      window.location.href = "./login.html";
+      return null;
+    }
   }
+
 
   async function logout() {
     try {
@@ -217,7 +185,7 @@
       ...(userId ? { "X-User-ID": String(userId) } : {}),
     };
 
-    const resp = await fetch(url, { method: "GET", credentials: "include", headers });
+    const resp = await fetch(url, { method: "GET", headers });
 
     const text = await resp.text();
     let json;
@@ -339,7 +307,6 @@
 
       const resp = await fetch(url, {
         method: "GET",
-        credentials: "include",
         headers: {
           "Content-Type": "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),

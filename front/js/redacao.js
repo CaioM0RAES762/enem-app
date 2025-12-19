@@ -3,7 +3,10 @@
     "use strict";
 
     // ===== Config =====
-    const API_BASE = `http://${window.location.hostname}:3000`;
+    const API_BASE = window.APP_CONFIG.API_BASE;
+
+
+
     const API_URL = `${API_BASE}/api`;
     const AUTH_ME_URL = `${API_BASE}/api/auth/me`;
 

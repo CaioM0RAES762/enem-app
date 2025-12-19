@@ -1,5 +1,6 @@
 // simulado.js
-const BACKEND_BASE = "http://localhost:3000";
+const BACKEND_BASE = window.APP_CONFIG.API_BASE;
+
 
 let cronometroInterval = null;
 const TEMPO_LIMITE_SEGUNDOS = 2 * 60 * 60;
@@ -443,7 +444,7 @@ async function salvarRespostaNoBanco(questaoRaw, respostaUsuario, respostaCorret
     const questao = normalizeQuestao(questaoRaw);
 
     const payload = {
-      sessao_id: getSessaoIdAtual(), 
+      sessao_id: getSessaoIdAtual(),
       questao_id: questao.id || null,
       disciplina: questao.discipline || window.estadoApp.disciplinaSelecionada,
 
@@ -524,7 +525,7 @@ async function finalizarSessaoEstudoNoFim(totalRespondidas, acertos, tempoTotal)
     const sessao_id = getSessaoIdAtual();
 
     const sessaoData = {
-      sessao_id, 
+      sessao_id,
       disciplina: window.estadoApp.disciplinaSelecionada,
       tema: window.estadoApp.temaSelecionado || "Simulado",
       questoes_respondidas: Number(totalRespondidas) || 0,

@@ -2,7 +2,9 @@
 
 // ==================== CONFIG API ====================
 
-const API_ORIGIN = "http://localhost:3000";
+const API_ORIGIN = window.APP_CONFIG.API_BASE;
+
+
 const API_BASE_URL = `${API_ORIGIN}/api`;
 
 const CORES_DISCIPLINAS = {

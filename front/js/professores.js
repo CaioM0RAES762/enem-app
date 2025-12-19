@@ -3,7 +3,11 @@
 // ===============================
 // Configuração
 // ===============================
-const API_BASE = `${location.protocol}//${location.hostname}:3000/api`;
+const API_BASE = window.APP_CONFIG.API_BASE;
+const API = `${API_BASE}/api`; 
+
+
+
 
 
 let authUser = null;

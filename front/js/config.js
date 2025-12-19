@@ -1,6 +1,8 @@
 // config.js 
+const API_BASE = window.APP_CONFIG.API_BASE;
 
-const API_BASE = "http://localhost:3000";
+
+
 
 const avatarUsuario = document.getElementById("avatarUsuario");
 const menuUsuario = document.getElementById("menuUsuario");
